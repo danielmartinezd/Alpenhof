@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpenhof | Luxury Mountain Rental</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+
+    <!-- I18n Data -->
+    <script src="translations.js"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Alpenhof</div>
+        <nav>
+            <ul>
+                <li><a href="#photos" data-i18n="nav.photos">Photos</a></li>
+                <li><a href="#details" data-i18n="nav.details">Details</a></li>
+                <li><a href="#book" data-i18n="nav.book">Book Now</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <div class="language-switcher">
+                <select id="language-select" aria-label="Select Language">
+                    <option value="en">🇬🇧 EN</option>
+                    <option value="de">🇩🇪 DE</option>
+                    <option value="fr">🇫🇷 FR</option>
+                    <option value="it">🇮🇹 IT</option>
+                    <option value="es">🇪🇸 ES</option>
+                </select>
+            </div>
+            <a href="#book" class="btn book-btn" data-i18n="nav.reserve">Book</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 data-i18n="hero.title">Escape to the Alps</h1>
+            <p data-i18n="hero.subtitle">Experience absolute tranquility in our modern luxury cabin. The perfect getaway
+                for nature lovers.</p>
+            <a href="#details" class="btn" data-i18n="hero.cta">View Availability</a>
+        </div>
+    </section>
+
+    <!-- Photos Section -->
+    <section id="photos">
+        <h2 class="section-title" data-i18n="photos.title">The Lodge</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="images/hero.png" alt="Exterior View">
+            </div>
+            <div class="gallery-item">
+                <img src="images/living.png" alt="Living Room">
+            </div>
+            <div class="gallery-item">
+                <img src="images/bedroom.png" alt="Gateway Bedroom">
+            </div>
+            <!-- Duplicating for layout balance if needed or use placeholders -->
+            <div class="gallery-item">
+                <!-- Reusing living room as a detail shot placeholder -->
+                <img src="images/living.png" alt="Cozy Detail" style="filter: brightness(0.9);">
+            </div>
+        </div>
+    </section>
+
+    <!-- Extras Section -->
+    <section id="extras" class="extras">
+        <h2 class="section-title" data-i18n="extras.title">Premium Extras</h2>
+        <div class="extras-grid">
+            <div class="extra-card">
+                <div class="extra-icon">🏊‍♂️</div>
+                <h3 data-i18n="extras.pool.title">Swimming Pool</h3>
+                <p data-i18n="extras.pool.desc">Unlimited access to the heated wellness pool included.</p>
+            </div>
+            <div class="extra-card">
+                <div class="extra-icon">🎿</div>
+                <h3 data-i18n="extras.ski.title">Ski Room</h3>
+                <p data-i18n="extras.ski.desc">Heated storage for your skis and boot drying facilities.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Details: Price & Availability -->
+    <section id="details" class="features">
+        <h2 class="section-title" data-i18n="details.title">Stay With Us</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3 data-i18n="details.rate.title">Nightly Rate</h3>
+                <div class="price-tag">€250</div>
+                <p data-i18n="details.rate.min_stay">Minimum 3 nights stay</p>
+                <p data-i18n="details.rate.cleaning">Cleaning fee included</p>
+            </div>
+            <div class="feature-card">
+                <h3 data-i18n="details.availability.title">Availability</h3>
+                <p style="margin-bottom: 1rem;" data-i18n="details.availability.desc">We are currently accepting
+                    bookings for the Winter 2024 season.</p>
+                <div class="availability-status" data-i18n="details.availability.status">Available</div>
+            </div>
+            <div class="feature-card">
+                <h3 data-i18n="amenities.title">Amenities</h3>
+                <ul style="list-style: none; text-align: left; padding-left: 1rem;">
+                    <li>✓ <span data-i18n="amenities.wifi">High-speed WiFi</span></li>
+                    <li>✓ <span data-i18n="amenities.kitchen">Full Kitchen</span></li>
+                    <li>✓ <span data-i18n="amenities.fireplace">Wood Fireplace</span></li>
+                    <li>✓ <span data-i18n="amenities.views">Mountain Views</span></li>
+                    <li>✓ <span data-i18n="amenities.parking">Private Parking</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Detailed Amenities Section -->
+    <section id="amenities-detailed" class="amenities-detailed">
+        <h2 class="section-title" data-i18n="amenities_detailed.title">Everything You Need</h2>
+        <div class="amenities-container">
+            <div class="amenity-group">
+                <h3 data-i18n="amenities_detailed.kitchen.title">Chef's Kitchen</h3>
+                <p data-i18n="amenities_detailed.kitchen.items">Nespresso machine, premium cutlery, dishwasher,
+                    induction cooktop.</p>
+            </div>
+            <div class="amenity-group">
+                <h3 data-i18n="amenities_detailed.living.title">Cozy Living</h3>
+                <p data-i18n="amenities_detailed.living.items">Smart TV with Netflix, board games collection, bluetooth
+                    speaker.</p>
+            </div>
+            <div class="amenity-group">
+                <h3 data-i18n="amenities_detailed.bathroom.title">Bathroom</h3>
+                <p data-i18n="amenities_detailed.bathroom.items">Toilet, shower with high pressure hot water, towels,
+                    and hair dryer.</p>
+            </div>
+            <div class="amenity-group" style="border-left-color: #E74C3C;">
+                <h3 data-i18n="house_rules.title">House Rules</h3>
+                <p data-i18n="house_rules.items">Non-smoking apartment (terrace available). Pet-free.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="location">
+        <h2 class="section-title" data-i18n="location.title">Location</h2>
+        <div class="location-container">
+            <div class="address-card">
+                <div class="address-icon">📍</div>
+                <div class="address-details">
+                    <p>Hauptstrasse 155</p>
+                    <p>3992 Bettmeralp</p>
+                    <p data-i18n="location.address.country">Switzerland</p>
+                </div>
+            </div>
+            <div class="map-container">
+                <iframe src="https://maps.google.com/maps?q=46.392028,8.066750&hl=en&z=17&output=embed" width="100%"
+                    height="350" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="book" class="booking">
+        <div class="booking-content">
+            <h2 class="section-title" data-i18n="book.title">Book Your Stay</h2>
+            <p data-i18n="book.desc">Ready to experience Alpenhof? Send us an email to reserve your dates.</p>
+
+            <div class="contact-info">
+                <p>Email: reservations@alpenhof.com</p>
+                <p>Phone: +43 555 123456</p>
+            </div>
+
+            <a href="mailto:reservations@alpenhof.com?subject=Booking Inquiry for Alpenhof&body=Hello, I would like to inquire about booking the Alpenhof cabin for the following dates..."
+                class="btn" data-i18n="book.cta">Send via Email</a>
+        </div>
+    </section>
+
+    <footer>
+        <p data-i18n="footer.rights">&copy; 2024 Alpenhof Rentals. All rights reserved.</p>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+        <img class="lightbox-content" id="lightbox-img">
+        <div id="caption"></div>
+    </div>
+
+</body>
+
+</html>
