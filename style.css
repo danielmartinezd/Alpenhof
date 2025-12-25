@@ -139,7 +139,7 @@ header.scrolled .language-switcher select:hover {
 /* Hero Section */
 .hero {
     height: 100vh;
-    background-image: linear-gradient(var(--overlay), var(--overlay)), url('images/hero.png');
+    background-image: linear-gradient(var(--overlay), var(--overlay)), url('images/hero2.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
