@@ -139,11 +139,124 @@ class LanguageManager {
                 el.innerText = translations[lang][key];
             }
         });
+
+        // Update Weather if loaded
+        const weatherTextEl = document.getElementById('weather-text');
+        if (weatherTextEl) {
+            const weatherKey = weatherTextEl.getAttribute('data-weather-key');
+            if (weatherKey && translations[lang][weatherKey]) {
+                const currentText = weatherTextEl.innerText;
+                const tempPart = currentText.split('|')[0]; // Keep temperature
+                weatherTextEl.innerText = `${tempPart}| ${translations[lang][weatherKey]}`;
+            }
+        }
     }
+}
+
+// Map Route Toggle
+const mapFrame = document.getElementById('map-frame');
+const showRouteBtn = document.getElementById('show-route-btn');
+const originalMapSrc = "https://maps.google.com/maps?q=46.392028,8.066750&hl=en&z=17&output=embed";
+const routeMapSrc = "https://maps.google.com/maps?saddr=Bettmeralp+Bahnen&daddr=46.392028,8.066750&dirflg=w&hl=en&z=16&output=embed";
+let isRouteShown = false;
+
+if (showRouteBtn) {
+    showRouteBtn.addEventListener('click', () => {
+        if (!isRouteShown) {
+            mapFrame.src = routeMapSrc;
+            showRouteBtn.setAttribute('data-i18n', 'location.hide_route');
+            showRouteBtn.innerText = translations[new LanguageManager().currentLang]['location.hide_route'];
+            isRouteShown = true;
+        } else {
+            mapFrame.src = originalMapSrc;
+            showRouteBtn.setAttribute('data-i18n', 'location.show_route');
+            showRouteBtn.innerText = translations[new LanguageManager().currentLang]['location.show_route'];
+            isRouteShown = false;
+        }
+    });
+}
+
+// Weather Functionality
+async function fetchWeather() {
+    const iconEl = document.getElementById('weather-icon');
+    const textEl = document.getElementById('weather-text');
+
+    if (!iconEl || !textEl) return;
+
+    try {
+        const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=46.392&longitude=8.0667&current=temperature_2m,weather_code&timezone=Europe%2FBerlin');
+        const data = await response.json();
+        const current = data.current;
+        const temp = Math.round(current.temperature_2m);
+        const code = current.weather_code;
+
+        let weatherKey = 'weather.clear';
+        let icon = '☀️';
+
+        // Map WMO codes
+        if (code === 0) { weatherKey = 'weather.clear'; icon = '☀️'; }
+        else if (code >= 1 && code <= 3) { weatherKey = 'weather.clouds'; icon = '☁️'; }
+        else if (code >= 45 && code <= 48) { weatherKey = 'weather.fog'; icon = '🌫️'; }
+        else if (code >= 51 && code <= 67) { weatherKey = 'weather.rain'; icon = '🌧️'; }
+        else if (code >= 71 && code <= 77) { weatherKey = 'weather.snow'; icon = '❄️'; }
+        else if (code >= 80 && code <= 82) { weatherKey = 'weather.rain'; icon = '🌧️'; }
+        else if (code >= 85 && code <= 86) { weatherKey = 'weather.snow'; icon = '❄️'; }
+        else if (code >= 95) { weatherKey = 'weather.thunderstorm'; icon = '⚡'; }
+
+        iconEl.innerText = icon;
+        // Check if LanguageManager is available
+        const lang = localStorage.getItem('alpenhof_lang') || 'en';
+        const desc = translations[lang][weatherKey] || translations['en'][weatherKey];
+        textEl.innerText = `${temp}°C | ${desc}`;
+        textEl.setAttribute('data-weather-key', weatherKey); // Store key for dynamic language switch
+
+    } catch (error) {
+        console.error('Error fetching weather:', error);
+        textEl.innerText = 'Unavailable';
+    }
+}
+
+// Booking Form Handler
+const bookingForm = document.getElementById('booking-form');
+if (bookingForm) {
+    bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(bookingForm);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const checkin = formData.get('checkin');
+        const checkout = formData.get('checkout');
+        const guests = formData.get('guests');
+        const message = formData.get('message');
+
+        const subject = `Booking Request: Alpenhof - ${name}`;
+        const body = `Name: ${name}
+Email: ${email}
+Check-in: ${checkin}
+Check-out: ${checkout}
+Guests: ${guests}
+
+Message:
+${message}`;
+
+        window.location.href = `mailto:alpenhof.bettmeralp@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
 }
 
 // Initialize Language Manager after DOM Load
 document.addEventListener('DOMContentLoaded', () => {
     new LanguageManager();
+    fetchWeather();
+
+    // Set min date for checkin to today
+    const today = new Date().toISOString().split('T')[0];
+    const checkinInput = document.getElementById('checkin');
+    if (checkinInput) {
+        checkinInput.min = today;
+        checkinInput.addEventListener('change', () => {
+            document.getElementById('checkout').min = checkinInput.value;
+        });
+    }
 });
 
