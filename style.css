@@ -103,6 +103,10 @@ header.scrolled nav a:hover {
     gap: 1.5rem;
 }
 
+.mobile-menu-btn {
+    display: none;
+}
+
 /* Language Switcher */
 .language-switcher select {
     appearance: none;
