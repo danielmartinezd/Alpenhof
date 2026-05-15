@@ -222,6 +222,27 @@ let languageManager;
 document.addEventListener('DOMContentLoaded', () => {
     languageManager = new LanguageManager();
 
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const nav = document.querySelector('nav');
+    const navLinks = document.querySelectorAll('nav ul li a');
+
+    if (mobileMenuBtn && nav) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            nav.classList.toggle('active');
+            document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                nav.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+    }
+
     // Set min date for checkin to today
     const today = new Date().toISOString().split('T')[0];
     const checkinInput = document.getElementById('checkin');
