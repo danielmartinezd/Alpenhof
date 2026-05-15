@@ -188,7 +188,7 @@ const translations = {
         "location.address.country": "Schweiz",
         "info.title": "Alles, was Sie wissen müssen",
         "info.category.arrival": "Ankunft & Abreise",
-        "info.category.apartment": "Das Apartment & Ausstattung",
+        "info.category.apartment": "Apartment & Ausstattung",
         "info.category.practical": "Praktische Informationen",
         "faq.title": "Häufige Fragen",
         "faq.checkin.question": "Check-in/Check-out?",
