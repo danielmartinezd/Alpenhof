@@ -141,6 +141,15 @@ class LanguageManager {
                 el.innerHTML = text;
             }
         });
+
+        // Update placeholders
+        const placeholders = document.querySelectorAll('[data-i18n-placeholder]');
+        placeholders.forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (translations[lang] && translations[lang][key]) {
+                el.placeholder = translations[lang][key];
+            }
+        });
     }
 }
 

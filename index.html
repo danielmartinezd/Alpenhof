@@ -346,13 +346,17 @@
 
             <form id="booking-form" class="booking-form">
                 <div class="form-group">
-                    <label for="name" data-i18n="form.name">Name</label>
-                    <input type="text" id="name" name="name" required placeholder="Your Name">
+                    <label for="name" data-i18n="form.name">First and last name</label>
+                    <input type="text" id="name" name="name" required 
+                        data-i18n-placeholder="form.name_placeholder"
+                        placeholder="Your Name">
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="email" data-i18n="form.email">Email</label>
-                        <input type="email" id="email" name="email" required placeholder="your@email.com">
+                        <input type="email" id="email" name="email" required 
+                            data-i18n-placeholder="form.email_placeholder"
+                            placeholder="your@email.com">
                     </div>
                     <div class="form-group">
                         <label for="phone" data-i18n="form.phone">Phone</label>
@@ -394,6 +398,7 @@
                 <div class="form-group">
                     <label for="message" data-i18n="form.message">Message</label>
                     <textarea id="message" name="message" rows="4"
+                        data-i18n-placeholder="form.placeholder"
                         placeholder="Any special requests or questions?"></textarea>
                 </div>
                 <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer;"
@@ -401,7 +406,7 @@
             </form>
 
             <div class="contact-info-footer" style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
-                <p>Or email us directly: <a href="mailto:alpenhof.bettmeralp@gmail.com"
+                <p><span data-i18n="form.email_direct">Or email us directly:</span> <a href="mailto:alpenhof.bettmeralp@gmail.com"
                         style="text-decoration: underline;">alpenhof.bettmeralp@gmail.com</a></p>
                 <p data-i18n="faq.checkin.answer">Check in from 14:00.<br>Check out before 10:00.</p>
             </div>
