@@ -32,7 +32,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-document.querySelectorAll('section > div, .section-title, .extras-grid, .amenities-container').forEach(el => {
+document.querySelectorAll('section > div, .section-title, .extras-grid').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'all 0.8s ease-out';
@@ -110,11 +110,11 @@ document.addEventListener('keydown', (e) => {
 class LanguageManager {
     constructor() {
         this.currentLang = localStorage.getItem('alpenhof_lang') || 'en';
-        this.select = document.getElementById('language-select');
-        this.init();
+        this.initLanguageSelector();
     }
 
-    init() {
+    initLanguageSelector() {
+        this.select = document.getElementById('language-select');
         if (this.select) {
             this.select.value = this.currentLang;
             this.updateLanguage(this.currentLang);
@@ -130,20 +130,130 @@ class LanguageManager {
     updateLanguage(lang) {
         document.documentElement.lang = lang;
         const elements = document.querySelectorAll('[data-i18n]');
+        const currentYear = new Date().getFullYear();
 
         elements.forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (translations[lang] && translations[lang][key]) {
-                // If element has nested HTML (like spans), we might want to be careful
-                // But for this use case, textContent is usually safer unless we need HTML in translations
-                el.innerText = translations[lang][key];
+                let text = translations[lang][key];
+                // Replace year placeholder if it exists
+                text = text.replace('{year}', currentYear);
+                el.innerHTML = text;
             }
         });
+
+        // Update placeholders
+        const placeholders = document.querySelectorAll('[data-i18n-placeholder]');
+        placeholders.forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (translations[lang] && translations[lang][key]) {
+                el.placeholder = translations[lang][key];
+            }
+        });
+
+        // Update select value if it exists
+        if (this.select) {
+            this.select.value = lang;
+        }
     }
 }
 
-// Initialize Language Manager after DOM Load
+// Map Route Toggle
+const mapFrame = document.getElementById('map-frame');
+const showRouteBtn = document.getElementById('show-route-btn');
+const originalMapSrc = "https://maps.google.com/maps?q=46.392028,8.066750&hl=en&z=17&output=embed";
+const routeMapSrc = "https://maps.google.com/maps?saddr=Bettmeralp+Bahnen&daddr=46.392028,8.066750&dirflg=w&hl=en&z=16&output=embed";
+let isRouteShown = false;
+
+if (showRouteBtn) {
+    showRouteBtn.addEventListener('click', () => {
+        const lang = languageManager ? languageManager.currentLang : 'en';
+        if (!isRouteShown) {
+            mapFrame.src = routeMapSrc;
+            showRouteBtn.setAttribute('data-i18n', 'location.hide_route');
+            showRouteBtn.innerHTML = translations[lang]['location.hide_route'];
+            isRouteShown = true;
+        } else {
+            mapFrame.src = originalMapSrc;
+            showRouteBtn.setAttribute('data-i18n', 'location.show_route');
+            showRouteBtn.innerHTML = translations[lang]['location.show_route'];
+            isRouteShown = false;
+        }
+    });
+}
+
+
+
+// Booking Form Handler
+const bookingForm = document.getElementById('booking-form');
+if (bookingForm) {
+    bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(bookingForm);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const phone = formData.get('phone');
+        const checkin = formData.get('checkin');
+        const checkout = formData.get('checkout');
+        const guests = formData.get('guests');
+        const children = formData.get('children');
+        const message = formData.get('message');
+
+        const subject = `Booking Request: Chalet Alpenhof - ${name}`;
+        const body = `Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Check-in: ${checkin}
+Check-out: ${checkout}
+Adults: ${guests}
+Children: ${children}
+
+Message:
+${message}`;
+
+        window.location.href = `mailto:alpenhof.bettmeralp@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+}
+
+// Initialize global components
+let languageManager;
+
 document.addEventListener('DOMContentLoaded', () => {
-    new LanguageManager();
+    languageManager = new LanguageManager();
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const nav = document.querySelector('nav');
+    const navLinks = document.querySelectorAll('nav ul li a');
+
+    if (mobileMenuBtn && nav) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            nav.classList.toggle('active');
+            document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                nav.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+    }
+
+    // Set min date for checkin to today
+    const today = new Date().toISOString().split('T')[0];
+    const checkinInput = document.getElementById('checkin');
+    if (checkinInput) {
+        checkinInput.min = today;
+        checkinInput.addEventListener('change', () => {
+            const checkoutInput = document.getElementById('checkout');
+            if (checkoutInput) {
+                checkoutInput.min = checkinInput.value;
+            }
+        });
+    }
 });
 
