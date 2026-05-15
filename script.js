@@ -218,10 +218,12 @@ if (bookingForm) {
         const checkout = formData.get('checkout');
         const guests = formData.get('guests');
         const children = formData.get('children');
+        const language = formData.get('language');
         const message = formData.get('message');
 
         const subject = `Booking Request: Chalet Alpenhof - ${name}`;
         const body = `Name: ${name}
+Language: ${language}
 Email: ${email}
 Phone: ${phone}
 Check-in: ${checkin}
