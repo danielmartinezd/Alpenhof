@@ -130,26 +130,17 @@ class LanguageManager {
     updateLanguage(lang) {
         document.documentElement.lang = lang;
         const elements = document.querySelectorAll('[data-i18n]');
+        const currentYear = new Date().getFullYear();
 
         elements.forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (translations[lang] && translations[lang][key]) {
-                // If element has nested HTML (like spans), we might want to be careful
-                // But for this use case, textContent is usually safer unless we need HTML in translations
-                el.innerText = translations[lang][key];
+                let text = translations[lang][key];
+                // Replace year placeholder if it exists
+                text = text.replace('{year}', currentYear);
+                el.innerHTML = text;
             }
         });
-
-        // Update Weather if loaded
-        const weatherTextEl = document.getElementById('weather-text');
-        if (weatherTextEl) {
-            const weatherKey = weatherTextEl.getAttribute('data-weather-key');
-            if (weatherKey && translations[lang][weatherKey]) {
-                const currentText = weatherTextEl.innerText;
-                const tempPart = currentText.split('|')[0]; // Keep temperature
-                weatherTextEl.innerText = `${tempPart}| ${translations[lang][weatherKey]}`;
-            }
-        }
     }
 }
 
@@ -165,56 +156,18 @@ if (showRouteBtn) {
         if (!isRouteShown) {
             mapFrame.src = routeMapSrc;
             showRouteBtn.setAttribute('data-i18n', 'location.hide_route');
-            showRouteBtn.innerText = translations[new LanguageManager().currentLang]['location.hide_route'];
+            showRouteBtn.innerHTML = translations[new LanguageManager().currentLang]['location.hide_route'];
             isRouteShown = true;
         } else {
             mapFrame.src = originalMapSrc;
             showRouteBtn.setAttribute('data-i18n', 'location.show_route');
-            showRouteBtn.innerText = translations[new LanguageManager().currentLang]['location.show_route'];
+            showRouteBtn.innerHTML = translations[new LanguageManager().currentLang]['location.show_route'];
             isRouteShown = false;
         }
     });
 }
 
-// Weather Functionality
-async function fetchWeather() {
-    const iconEl = document.getElementById('weather-icon');
-    const textEl = document.getElementById('weather-text');
 
-    if (!iconEl || !textEl) return;
-
-    try {
-        const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=46.392&longitude=8.0667&current=temperature_2m,weather_code&timezone=Europe%2FBerlin');
-        const data = await response.json();
-        const current = data.current;
-        const temp = Math.round(current.temperature_2m);
-        const code = current.weather_code;
-
-        let weatherKey = 'weather.clear';
-        let icon = '☀️';
-
-        // Map WMO codes
-        if (code === 0) { weatherKey = 'weather.clear'; icon = '☀️'; }
-        else if (code >= 1 && code <= 3) { weatherKey = 'weather.clouds'; icon = '☁️'; }
-        else if (code >= 45 && code <= 48) { weatherKey = 'weather.fog'; icon = '🌫️'; }
-        else if (code >= 51 && code <= 67) { weatherKey = 'weather.rain'; icon = '🌧️'; }
-        else if (code >= 71 && code <= 77) { weatherKey = 'weather.snow'; icon = '❄️'; }
-        else if (code >= 80 && code <= 82) { weatherKey = 'weather.rain'; icon = '🌧️'; }
-        else if (code >= 85 && code <= 86) { weatherKey = 'weather.snow'; icon = '❄️'; }
-        else if (code >= 95) { weatherKey = 'weather.thunderstorm'; icon = '⚡'; }
-
-        iconEl.innerText = icon;
-        // Check if LanguageManager is available
-        const lang = localStorage.getItem('alpenhof_lang') || 'en';
-        const desc = translations[lang][weatherKey] || translations['en'][weatherKey];
-        textEl.innerText = `${temp}°C | ${desc}`;
-        textEl.setAttribute('data-weather-key', weatherKey); // Store key for dynamic language switch
-
-    } catch (error) {
-        console.error('Error fetching weather:', error);
-        textEl.innerText = 'Unavailable';
-    }
-}
 
 // Booking Form Handler
 const bookingForm = document.getElementById('booking-form');
@@ -225,17 +178,21 @@ if (bookingForm) {
         const formData = new FormData(bookingForm);
         const name = formData.get('name');
         const email = formData.get('email');
+        const phone = formData.get('phone');
         const checkin = formData.get('checkin');
         const checkout = formData.get('checkout');
         const guests = formData.get('guests');
+        const children = formData.get('children');
         const message = formData.get('message');
 
-        const subject = `Booking Request: Alpenhof - ${name}`;
+        const subject = `Booking Request: Chalet Alpenhof - ${name}`;
         const body = `Name: ${name}
 Email: ${email}
+Phone: ${phone}
 Check-in: ${checkin}
 Check-out: ${checkout}
-Guests: ${guests}
+Adults: ${guests}
+Children: ${children}
 
 Message:
 ${message}`;
@@ -247,7 +204,7 @@ ${message}`;
 // Initialize Language Manager after DOM Load
 document.addEventListener('DOMContentLoaded', () => {
     new LanguageManager();
-    fetchWeather();
+
 
     // Set min date for checkin to today
     const today = new Date().toISOString().split('T')[0];
