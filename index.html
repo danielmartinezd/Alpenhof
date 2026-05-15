@@ -350,8 +350,13 @@
             <p data-i18n="book.desc" style="margin-bottom: 2rem;">Ready to experience Chalet Alpenhof? Send us an email to reserve your dates.
                 
             We are looking forward to have you as our guests.</p>
+            
+            <p style="margin-bottom: 2rem; font-size: 0.9rem; opacity: 0.8;">
+                <span data-i18n="form.language">Language</span>: <span id="current-lang-display">English</span>
+            </p>
 
             <form id="booking-form" class="booking-form">
+                <input type="hidden" name="_language" id="booking-lang-input" value="en">
                 <div class="form-group">
                     <label for="name" data-i18n="form.name">First and last name</label>
                     <input type="text" id="name" name="name" required 
