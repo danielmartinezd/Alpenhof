@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alpenhof | Luxury Mountain Rental</title>
+    <title>Chalet Alpenhof Bettmeralp Rental</title>
     <link rel="stylesheet" href="style.css">
 
     <!-- Fonts -->
@@ -22,11 +22,13 @@
 <body>
 
     <header>
-        <div class="logo">Alpenhof</div>
+        <div class="logo">Chalet Alpenhof</div>
         <nav>
             <ul>
                 <li><a href="#photos" data-i18n="nav.photos">Photos</a></li>
                 <li><a href="#details" data-i18n="nav.details">Details</a></li>
+                <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
+                <li><a href="#location" data-i18n="nav.location">Location</a></li>
                 <li><a href="#book" data-i18n="nav.book">Book Now</a></li>
             </ul>
         </nav>
@@ -39,9 +41,15 @@
                     <option value="fr">🇫🇷 FR</option>
                     <option value="it">🇮🇹 IT</option>
                     <option value="es">🇪🇸 ES</option>
+                    <option value="nl">🇳🇱 NL</option>
                 </select>
             </div>
-            <a href="#book" class="btn book-btn" data-i18n="nav.reserve">Book</a>
+            <a href="#book" class="btn book-btn" data-i18n="nav.book">Book Now</a>
+            <button class="mobile-menu-btn" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </header>
 
@@ -49,21 +57,36 @@
     <section class="hero">
         <div class="hero-content">
             <h1 data-i18n="hero.title">Escape to the Alps</h1>
-            <p data-i18n="hero.subtitle">Experience absolute tranquility in our modern luxury cabin. The perfect getaway
-                for nature lovers.</p>
+
+            <p class="hero-subtitle">
+                <span data-i18n="hero.subtitle">Experience comfort in our modern 3.5-room apartment.</span><br>
+                <span data-i18n="hero.location">Located less than 100m from the Schönbiel and Wurzenbord chairlift.</span>
+            </p>
             <a href="#details" class="btn" data-i18n="hero.cta">View Availability</a>
         </div>
     </section>
 
     <!-- Photos Section -->
     <section id="photos">
-        <h2 class="section-title" data-i18n="photos.title">The Lodge</h2>
+        <h2 class="section-title" data-i18n="photos.title">Photos</h2>
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="images/living_room_new.png" alt="Living Room">
+                <img src="images/exterior_new.png" alt="Exterior View">
             </div>
             <div class="gallery-item">
-                <img src="images/bedroom_new.png" alt="Master Bedroom">
+                <img src="images/hero2.png" alt="Cozy Detail">
+            </div>
+            <div class="gallery-item">
+                <img src="images/entrance_new.png" alt="Entrance">
+            </div>
+            <div class="gallery-item">
+                <img src="images/corridor_new.png" alt="Corridor">
+            </div>
+            <div class="gallery-item">
+                <img src="images/living_room_2_new.png" alt="Living Room View 2">
+            </div>
+            <div class="gallery-item">
+                <img src="images/living_room_new.png" alt="Living Room">
             </div>
             <div class="gallery-item">
                 <img src="images/kitchen_new.png" alt="Full Kitchen">
@@ -72,40 +95,25 @@
                 <img src="images/bathroom_new.png" alt="Bathroom">
             </div>
             <div class="gallery-item">
-                <img src="images/exterior_new.png" alt="Exterior View">
-            </div>
-            <div class="gallery-item">
-                <img src="images/hero2.png" alt="Cozy Detail">
+                <img src="images/bedroom_new.png" alt="Master Bedroom">
             </div>
             <div class="gallery-item">
                 <img src="images/second_bedroom_new.png" alt="Second Bedroom">
             </div>
-            <div class="gallery-item">
-                <img src="images/living_room_2_new.png" alt="Living Room View 2">
-            </div>
-            <div class="gallery-item">
-                <img src="images/corridor_new.png" alt="Corridor">
-            </div>
-            <div class="gallery-item">
-                <img src="images/entrance_new.png" alt="Entrance">
-            </div>
         </div>
     </section>
 
-    <!-- Extras Section -->
-    <section id="extras" class="extras">
-        <h2 class="section-title" data-i18n="extras.title">Premium Extras</h2>
-        <div class="extras-grid">
-            <div class="extra-card">
-                <div class="extra-icon">🏊‍♂️</div>
-                <h3 data-i18n="extras.pool.title">Swimming Pool</h3>
-                <p data-i18n="extras.pool.desc">Unlimited access to the heated wellness pool included.</p>
+    <!-- Video & Floor Plan Section -->
+    <section id="multimedia" class="multimedia-section">
+        <div class="multimedia-grid">
+            <div class="media-container video-container">
+                <h2 class="section-title" data-i18n="video.title">Video Tour</h2>
+                <div class="video-placeholder">
+                    <div class="play-button">▶</div>
+                    <p>Walkthrough Video Coming Soon</p>
+                </div>
             </div>
-            <div class="extra-card">
-                <div class="extra-icon">🎿</div>
-                <h3 data-i18n="extras.ski.title">Ski Room</h3>
-                <p data-i18n="extras.ski.desc">Heated storage for your skis and boot drying facilities.</p>
-            </div>
+
         </div>
     </section>
 
@@ -114,53 +122,180 @@
         <h2 class="section-title" data-i18n="details.title">Stay With Us</h2>
         <div class="features-grid">
             <div class="feature-card">
-                <h3 data-i18n="details.rate.title">Nightly Rate</h3>
-                <div class="price-tag">CHF 249 - 269</div>
-                <p>New Year/Feb: CHF 269 | Rest: CHF 249</p>
+                <h3 data-i18n="details.rate.title">Winter Rates</h3>
+                <div class="price-tag" data-i18n="details.rate.winter_value">CHF 239 - 269</div>
+                <p data-i18n="details.rate.winter_desc">Main season: CHF 269 | Not main season: CHF 239</p>
                 <p data-i18n="details.rate.min_stay">Minimum 7 nights stay (Sat-Sat)</p>
                 <p data-i18n="details.rate.cleaning">Cleaning fee included</p>
             </div>
             <div class="feature-card">
-                <h3 data-i18n="details.availability.title">Availability</h3>
-                <p style="margin-bottom: 1rem;" data-i18n="details.availability.desc">We are currently accepting
-                    bookings for the Winter 2024 season.</p>
-                <div class="availability-status" data-i18n="details.availability.status">Available</div>
+                <h3 data-i18n="details.rate_summer.title">Summer Rates</h3>
+                <div class="price-tag" data-i18n="details.rate.summer_value">CHF 169 - 249</div>
+                <p data-i18n="details.rate.summer_desc">Main season: CHF 249 | Not main season: CHF 169</p>
+                <p data-i18n="details.rate_summer.min_stay">Minimum 2 nights stay. Discount for weekly bookings.</p>
+                <p data-i18n="details.rate.cleaning">Cleaning fee included</p>
+            </div>
+            <div class="feature-card">
+                <h3 data-i18n="details.apartment.title">The Apartment</h3>
+                <ul class="amenities-list" style="list-style: none; text-align: left; padding-left: 0;">
+                    <li>✓ <span data-i18n="details.apartment.capacity">Max 5 People</span></li>
+                    <li>✓ <span data-i18n="details.apartment.rooms">2 Bedrooms</span></li>
+                    <li>✓ <span data-i18n="details.apartment.bath">1 Bathroom (Shower)</span></li>
+                    <li>✓ <span data-i18n="details.apartment.ski_in">Ski-in / Ski-out</span></li>
+                    <li>✓ <span data-i18n="details.apartment.living">Open Kitchen / Living</span></li>
+                    <li>✓ <span data-i18n="details.apartment.terrace">Terrace</span></li>
+                    <li>✓ <span data-i18n="details.apartment.pets">Pets Not Allowed</span></li>
+                    <li>✓ <span data-i18n="details.apartment.smoking">Smoking Outside</span></li>
+                </ul>
             </div>
             <div class="feature-card">
                 <h3 data-i18n="amenities.title">Amenities</h3>
-                <ul style="list-style: none; text-align: left; padding-left: 1rem;">
-                    <li>✓ <span data-i18n="amenities.wifi">High-speed WiFi</span></li>
-                    <li>✓ <span data-i18n="amenities.kitchen">Full Kitchen</span></li>
-                    <li>✓ <span data-i18n="amenities.views">Mountain Views</span></li>
-                    <li>✓ <span data-i18n="amenities.parking">Private Parking</span></li>
+                <ul class="amenities-list" style="list-style: none; text-align: left; padding-left: 0;">
+                    <li>✓ <span data-i18n="amenities.wifi">WiFi & Smart TV</span></li>
+                    <li>✓ <span data-i18n="amenities.coffee">Coffee Machine (Tschibo Cafissimo)</span></li>
+                    <li>✓ <span data-i18n="amenities.dishwasher">Dishwasher</span></li>
+                    <li>✓ <span data-i18n="amenities.fridge">Fridge & Freezer</span></li>
+                    <li>✓ <span data-i18n="amenities.linen">Bed Covers & Towels</span></li>
+                    <li>✓ <span data-i18n="amenities.kitchen">Fully Equipped Kitchen</span></li>
+                    <li>✓ <span data-i18n="amenities.fondue">Fondue & Raclette</span></li>
+                    <li>✓ <span data-i18n="amenities.hairdryer">Hairdryer</span></li>
                 </ul>
             </div>
         </div>
     </section>
 
+    <!-- Extras Section -->
+    <section id="extras" class="extras">
+        <h2 class="section-title" data-i18n="extras.title">Extras</h2>
+        <div class="extras-grid">
+            <div class="extra-card">
+                <div class="extra-icon">🎿 🚲</div>
+                <h3 data-i18n="extras.ski.title">Ski Room</h3>
+                <p data-i18n="extras.ski.desc">Indoor ski and bike storage with boot drying facility.</p>
+            </div>
+            <div class="extra-card">
+                <div class="extra-icon">🏊‍♂️</div>
+                <h3 data-i18n="extras.pool.title">Swimming Pool</h3>
+                <p data-i18n="extras.pool.desc">Unlimited access to the heated wellness pool included.</p>
+            </div>
+        </div>
+    </section>
 
-    <!-- Detailed Amenities Section -->
-    <section id="amenities-detailed" class="amenities-detailed">
-        <h2 class="section-title" data-i18n="amenities_detailed.title">Everything You Need</h2>
-        <div class="amenities-container">
-            <div class="amenity-group">
-                <h3 data-i18n="amenities_detailed.kitchen.title">Chef's Kitchen</h3>
-                <p data-i18n="amenities_detailed.kitchen.items">Nespresso machine, premium cutlery, dishwasher,
-                    induction cooktop.</p>
+
+
+
+
+    <!-- All You Need To Know Section -->
+    <section id="faq" class="faq-section">
+        <h2 class="section-title" data-i18n="info.title">All you need to know</h2>
+        
+        <div class="faq-container">
+            <!-- Arrival & Departure -->
+            <div class="faq-category" style="grid-column: 1 / -1; margin-top: 1rem;">
+                <h3 class="subsection-title" data-i18n="info.category.arrival">Arrival & Departure</h3>
             </div>
-            <div class="amenity-group">
-                <h3 data-i18n="amenities_detailed.living.title">Cozy Living</h3>
-                <p data-i18n="amenities_detailed.living.items">Smart TV with Netflix, board games collection, bluetooth
-                    speaker.</p>
+            
+            <div class="faq-card">
+                <h3 data-i18n="faq.checkin.question">Check in/Check out?</h3>
+                <p data-i18n="faq.checkin.answer">Check in from 14:00.<br>Check out before 10:00.</p>
             </div>
-            <div class="amenity-group">
-                <h3 data-i18n="amenities_detailed.bathroom.title">Bathroom</h3>
-                <p data-i18n="amenities_detailed.bathroom.items">Toilet, shower with high pressure hot water, towels,
-                    and hair dryer.</p>
+            
+            <div class="faq-card">
+                <h3 data-i18n="faq.arrival.question">How do I get to the apartment?</h3>
+                <p data-i18n="faq.arrival.answer">Directions...</p>
             </div>
-            <div class="amenity-group" style="border-left-color: #E74C3C;">
+            
+            <div class="faq-card">
+                <h3 data-i18n="faq.gondola.question">First/Last Gondola?</h3>
+                <p data-i18n="faq.gondola.answer">Check SBB App (approx 5:45 - 23:15).</p>
+            </div>
+            
+            <div class="faq-card">
+                <h3 data-i18n="faq.parking.question">Where can I park?</h3>
+                <p data-i18n="faq.parking.answer">Car-free. Park at Bettmeralp Talstation.</p>
+            </div>
+
+            <div class="faq-card">
+                <h3 data-i18n="faq.luggage.question">Is it possible to store the luggage?</h3>
+                <p data-i18n="faq.luggage.answer">Yes, you can store it in the ski/bike room.</p>
+            </div>
+            
+            <div class="faq-card">
+                <h3 data-i18n="faq.ship_luggage.question">Can I send my luggage?</h3>
+                <p data-i18n="faq.ship_luggage.answer">SBB Luggage Special available.</p>
+            </div>
+
+            <!-- The Apartment & Amenities -->
+            <div class="faq-category" style="grid-column: 1 / -1; margin-top: 2rem;">
+                <h3 class="subsection-title" data-i18n="info.category.apartment">The Apartment & Amenities</h3>
+            </div>
+
+            <div class="faq-card" style="border-left-color: #c42440;">
                 <h3 data-i18n="house_rules.title">House Rules</h3>
-                <p data-i18n="house_rules.items">Non-smoking apartment (terrace available). Pet-free.</p>
+                <p data-i18n="house_rules.items">Non-smoking apartment (terrace available).</p>
+            </div>
+            
+            <div class="faq-card">
+                <h3 data-i18n="faq.pets.question">Are pets allowed?</h3>
+                <p data-i18n="faq.pets.answer">No, Chalet Alpenhof is a pet-free property.</p>
+            </div>
+
+            <div class="faq-card">
+                <h3 data-i18n="amenities_detailed.kitchen.title">Chef's Kitchen</h3>
+                <p data-i18n="amenities_detailed.kitchen.items">Nespresso machine, premium cutlery...</p>
+            </div>
+
+            <div class="faq-card">
+                <h3 data-i18n="faq.coffee.question">Coffee machine?</h3>
+                <p style="margin-bottom: 0.5rem;" data-i18n="faq.coffee.answer">Yes, Tchibo.</p>
+                <a href="https://www.coop.ch/de/lebensmittel/getraenke/kaffee/kaffeekapseln/cafissimo-kompatibel/c/m_4377?srsltid=AfmBOoplEgUrao5nq9tzPjYeVFHz9tNzxIj5lUJ4kLEou0RnIJQvuW9J"
+                    target="_blank" style="font-size: 0.9rem; color: var(--accent); text-decoration: underline;">Order
+                    Capsules (Coop)</a>
+            </div>
+
+            <div class="faq-card">
+                <h3 data-i18n="faq.kitchen_extras.question">Fondue/Raclette?</h3>
+                <p data-i18n="faq.kitchen_extras.answer">Yes, both available.</p>
+            </div>
+
+            <div class="faq-card">
+                <h3 data-i18n="amenities_detailed.living.title">Cozy time</h3>
+                <p data-i18n="amenities_detailed.living.items">Smart TV with Netflix...</p>
+            </div>
+
+            <div class="faq-card">
+                <h3 data-i18n="amenities_detailed.bathroom.title">Bathroom</h3>
+                <p data-i18n="amenities_detailed.bathroom.items">Toilet, shower...</p>
+            </div>
+
+            <div class="faq-card">
+                <h3 data-i18n="faq.water.question">Tap water safe?</h3>
+                <p data-i18n="faq.water.answer">Yes, tasty Alpine water.</p>
+            </div>
+
+            <!-- Practical Information -->
+            <div class="faq-category" style="grid-column: 1 / -1; margin-top: 2rem;">
+                <h3 class="subsection-title" data-i18n="info.category.practical">Practical Information</h3>
+            </div>
+
+            <div class="faq-card">
+                <h3 data-i18n="faq.cleaning.question">Cleaning fees?</h3>
+                <p data-i18n="faq.cleaning.answer">Included.</p>
+            </div>
+
+            <div class="faq-card">
+                <h3 data-i18n="faq.supermarket.question">Supermarket?</h3>
+                <p data-i18n="faq.supermarket.answer">Volg and Coop available.</p>
+            </div>
+
+            <div class="faq-card">
+                <h3 data-i18n="faq.garbage.question">Garbage?</h3>
+                <p data-i18n="faq.garbage.answer">Use official tax bags.</p>
+            </div>
+
+            <div class="faq-card">
+                <h3 data-i18n="faq.guestcard.question">Guest Card?</h3>
+                <p data-i18n="faq.guestcard.answer">Yes, included.</p>
             </div>
         </div>
     </section>
@@ -169,19 +304,40 @@
     <section id="location" class="location">
         <h2 class="section-title" data-i18n="location.title">Location</h2>
         <div class="location-container">
+            <!-- Webcam Link Added to Location -->
             <div class="address-card">
                 <div class="address-icon">📍</div>
                 <div class="address-details">
                     <p>Hauptstrasse 155</p>
                     <p>3992 Bettmeralp</p>
                     <p data-i18n="location.address.country">Switzerland</p>
+
+                    <div class="arrival-guide"
+                        style="margin-top: 2rem; text-align: left; background: #f8f9fa; padding: 1.5rem; border-radius: 8px;">
+                        <h4 style="margin-bottom: 1rem; color: var(--primary);" data-i18n="location.arrival.title">
+                            Getting Here</h4>
+                        <ol style="padding-left: 1.2rem; font-size: 0.95rem;">
+                            <li><span data-i18n="location.arrival.step1">Take the cable car from Bettmeralp Talstation to Bettmeralp.</span></li>
+                            <li><span data-i18n="location.arrival.step2">From the top station, walk ~15 mins or call a taxi to 'Chalet Alpenhof'.</span></li>
+                        </ol>
+                    </div>
+
                 </div>
             </div>
-            <div class="map-container">
-                <iframe src="https://maps.google.com/maps?q=46.392028,8.066750&hl=en&z=17&output=embed" width="100%"
-                    height="350" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+            <div class="location-right-col">
+                <div class="map-container">
+                    <iframe id="map-frame"
+                        src="https://maps.google.com/maps?q=46.392028,8.066750&hl=en&z=17&output=embed" width="100%"
+                        height="350" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                    <button id="show-route-btn" class="btn" style="margin-top: 0; width: 100%; border-radius: 0;"
+                        data-i18n="location.show_route">Show way from Bettmeralp Station to Chalet Alpenhof</button>
+                </div>
+
+                <a href="https://www.aletscharena.ch/en/live/webcams" target="_blank" class="btn"
+                    style="width: 100%; text-align: center; display: block; border-radius: 12px; background-color: var(--primary); border-color: var(--primary);"
+                    data-i18n="webcams.view_all">View All Webcams</a>
             </div>
         </div>
     </section>
@@ -190,22 +346,103 @@
     <section id="book" class="booking">
         <div class="booking-content">
             <h2 class="section-title" data-i18n="book.title">Book Your Stay</h2>
-            <p data-i18n="book.desc">Ready to experience Alpenhof? Send us an email to reserve your dates.</p>
+            <p data-i18n="book.desc" style="margin-bottom: 2rem;">Ready to experience Chalet Alpenhof? Send us an email to reserve your dates.
+                
+            We are looking forward to have you as our guests.</p>
 
-            <div class="contact-info">
-                <p>Email: alpenhof.bettmeralp@gmail.com</p>
-                <p>Phone: +41 79 636 24 21</p>
-                <p data-i18n="book.checkin" style="margin-top: 1rem; font-size: 1rem; opacity: 0.8;">Check-in: 14:00 |
-                    Check-out: 10:00 (Saturdays)</p>
+            <form id="booking-form" class="booking-form">
+                <div class="form-group">
+                    <label for="name" data-i18n="form.name">First and last name</label>
+                    <input type="text" id="name" name="name" required 
+                        data-i18n-placeholder="form.name_placeholder"
+                        placeholder="Your Name">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email" data-i18n="form.email">Email</label>
+                        <input type="email" id="email" name="email" required 
+                            data-i18n-placeholder="form.email_placeholder"
+                            placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" data-i18n="form.phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+41 79 123 45 67">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="checkin" data-i18n="form.checkin">Check-in</label>
+                        <input type="date" id="checkin" name="checkin" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout" data-i18n="form.checkout">Check-out</label>
+                        <input type="date" id="checkout" name="checkout" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="guests" data-i18n="form.guests">Adults</label>
+                        <select id="guests" name="guests">
+                            <option value="1">1</option>
+                            <option value="2" selected>2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="children" data-i18n="form.children">Children</label>
+                        <select id="children" name="children">
+                            <option value="0" selected>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message" data-i18n="form.message">Message</label>
+                    <textarea id="message" name="message" rows="4"
+                        data-i18n-placeholder="form.placeholder"
+                        placeholder="Any special requests or questions?"></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer;"
+                    data-i18n="form.submit">Send Request</button>
+            </form>
+
+            <div class="contact-info-footer" style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
+                <p><span data-i18n="form.email_direct">Or email us directly:</span> <a href="mailto:alpenhof.bettmeralp@gmail.com"
+                        style="text-decoration: underline;">alpenhof.bettmeralp@gmail.com</a></p>
+                <p data-i18n="faq.checkin.answer">Check in from 14:00.<br>Check out before 10:00.</p>
             </div>
+        </div>
+    </section>
 
-            <a href="mailto:alpenhof.bettmeralp@gmail.com?subject=Booking Inquiry for Alpenhof&body=Hello, I would like to inquire about booking the Alpenhof apartment for the following dates..."
-                class="btn" data-i18n="book.cta">Send via Email</a>
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews">
+        <h2 class="section-title" data-i18n="reviews.title">Guest Reviews</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text" data-i18n="reviews.3.text">"The perfect place for a family getaway..."</p>
+                <p class="review-author" data-i18n="reviews.3.author">- Lukas B., Switzerland</p>
+            </div>
+            <div class="review-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text" data-i18n="reviews.1.text">"Absolutely stunning views..."</p>
+                <p class="review-author" data-i18n="reviews.1.author">- Willem V., Holland</p>
+            </div>
+            <div class="review-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text" data-i18n="reviews.2.text">"Clean, modern, and very cozy..."</p>
+                <p class="review-author" data-i18n="reviews.2.author">- Thomas H., Germany</p>
+            </div>
         </div>
     </section>
 
     <footer>
-        <p data-i18n="footer.rights">&copy; 2024 Alpenhof Rentals. All rights reserved.</p>
+        <p data-i18n="footer.rights">&copy; 2026 Chalet Alpenhof. All rights reserved.</p>
     </footer>
 
     <!-- Lightbox Modal -->
