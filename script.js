@@ -110,19 +110,21 @@ document.addEventListener('keydown', (e) => {
 class LanguageManager {
     constructor() {
         this.currentLang = localStorage.getItem('alpenhof_lang') || 'en';
-        this.select = document.getElementById('language-select');
-        this.init();
+        this.initLanguageSelector();
     }
 
-    init() {
-        if (this.select) {
-            this.select.value = this.currentLang;
+    initLanguageSelector() {
+        this.switcher = document.getElementById('language-switcher');
+        if (this.switcher) {
             this.updateLanguage(this.currentLang);
 
-            this.select.addEventListener('change', (e) => {
-                this.currentLang = e.target.value;
-                localStorage.setItem('alpenhof_lang', this.currentLang);
-                this.updateLanguage(this.currentLang);
+            this.switcher.addEventListener('click', (e) => {
+                const btn = e.target.closest('.flag-btn');
+                if (btn) {
+                    this.currentLang = btn.dataset.lang;
+                    localStorage.setItem('alpenhof_lang', this.currentLang);
+                    this.updateLanguage(this.currentLang);
+                }
             });
         }
     }
@@ -150,6 +152,13 @@ class LanguageManager {
                 el.placeholder = translations[lang][key];
             }
         });
+
+        // Update active flag state
+        if (this.switcher) {
+            this.switcher.querySelectorAll('.flag-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+        }
     }
 }
 

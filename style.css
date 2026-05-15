@@ -104,35 +104,44 @@ header.scrolled nav a:hover {
 }
 
 /* Language Switcher */
-.language-switcher select {
-    appearance: none;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    color: var(--text-light);
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    font-family: var(--font-body);
-    font-size: 0.9rem;
+.language-switcher {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.flag-btn {
+    background: none;
+    border: none;
+    font-size: 1.4rem;
     cursor: pointer;
-    transition: var(--transition);
-    outline: none;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    padding: 2px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.language-switcher select:hover {
-    background: rgba(255, 255, 255, 0.1);
+.flag-btn:hover {
+    opacity: 1;
+    transform: translateY(-2px);
 }
 
-.language-switcher select option {
-    background-color: var(--bg-light);
-    color: var(--text-dark);
+.flag-btn.active {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.15);
 }
 
-header.scrolled .language-switcher select {
-    border-color: rgba(0, 0, 0, 0.2);
-    color: var(--text-dark);
+header.scrolled .flag-btn.active {
+    background: rgba(0, 0, 0, 0.05);
 }
 
-header.scrolled .language-switcher select:hover {
+header.scrolled .flag-btn {
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+header.scrolled .flag-btn:hover {
     background: rgba(0, 0, 0, 0.05);
 }
 
