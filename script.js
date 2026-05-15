@@ -32,7 +32,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-document.querySelectorAll('section > div, .section-title, .extras-grid, .amenities-container').forEach(el => {
+document.querySelectorAll('section > div, .section-title, .extras-grid').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'all 0.8s ease-out';
@@ -114,17 +114,15 @@ class LanguageManager {
     }
 
     initLanguageSelector() {
-        this.switcher = document.getElementById('language-switcher');
-        if (this.switcher) {
+        this.select = document.getElementById('language-select');
+        if (this.select) {
+            this.select.value = this.currentLang;
             this.updateLanguage(this.currentLang);
 
-            this.switcher.addEventListener('click', (e) => {
-                const btn = e.target.closest('.flag-btn');
-                if (btn) {
-                    this.currentLang = btn.dataset.lang;
-                    localStorage.setItem('alpenhof_lang', this.currentLang);
-                    this.updateLanguage(this.currentLang);
-                }
+            this.select.addEventListener('change', (e) => {
+                this.currentLang = e.target.value;
+                localStorage.setItem('alpenhof_lang', this.currentLang);
+                this.updateLanguage(this.currentLang);
             });
         }
     }
@@ -153,11 +151,9 @@ class LanguageManager {
             }
         });
 
-        // Update active flag state
-        if (this.switcher) {
-            this.switcher.querySelectorAll('.flag-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-            });
+        // Update select value if it exists
+        if (this.select) {
+            this.select.value = lang;
         }
     }
 }
@@ -171,15 +167,16 @@ let isRouteShown = false;
 
 if (showRouteBtn) {
     showRouteBtn.addEventListener('click', () => {
+        const lang = languageManager ? languageManager.currentLang : 'en';
         if (!isRouteShown) {
             mapFrame.src = routeMapSrc;
             showRouteBtn.setAttribute('data-i18n', 'location.hide_route');
-            showRouteBtn.innerHTML = translations[new LanguageManager().currentLang]['location.hide_route'];
+            showRouteBtn.innerHTML = translations[lang]['location.hide_route'];
             isRouteShown = true;
         } else {
             mapFrame.src = originalMapSrc;
             showRouteBtn.setAttribute('data-i18n', 'location.show_route');
-            showRouteBtn.innerHTML = translations[new LanguageManager().currentLang]['location.show_route'];
+            showRouteBtn.innerHTML = translations[lang]['location.show_route'];
             isRouteShown = false;
         }
     });
@@ -219,10 +216,11 @@ ${message}`;
     });
 }
 
-// Initialize Language Manager after DOM Load
-document.addEventListener('DOMContentLoaded', () => {
-    new LanguageManager();
+// Initialize global components
+let languageManager;
 
+document.addEventListener('DOMContentLoaded', () => {
+    languageManager = new LanguageManager();
 
     // Set min date for checkin to today
     const today = new Date().toISOString().split('T')[0];
@@ -230,7 +228,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (checkinInput) {
         checkinInput.min = today;
         checkinInput.addEventListener('change', () => {
-            document.getElementById('checkout').min = checkinInput.value;
+            const checkoutInput = document.getElementById('checkout');
+            if (checkoutInput) {
+                checkoutInput.min = checkinInput.value;
+            }
         });
     }
 });
